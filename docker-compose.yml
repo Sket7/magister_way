@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nest-backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PYTHON_SCRIPTS_PATH: /srv/jupyter/scripts
+    volumes:
+      - ./backend:/app
+      - scripts-data:/srv/jupyter/scripts
+    depends_on:
+      - jupyterhub
+    command: npm run start:dev
+
+  jupyterhub:
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+    container_name: jupyterhub
+    ports:
+      - "8000:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      NB_USER: dev
+      NB_UID: 1000
+      NB_GID: 100
+    volumes:
+      - scripts-data:/home/jovyan/work
+    command: start-notebook.sh --NotebookApp.token='token'
+
+volumes:
+  scripts-data:
