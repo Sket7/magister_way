@@ -16,7 +16,7 @@ services:
       - scripts-data:/srv/jupyter/scripts
     depends_on:
       - jupyterhub
-    command: npm run start:dev
+    command: bun start
 
   jupyterhub:
     build:
