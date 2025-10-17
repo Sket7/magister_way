@@ -1,4 +1,4 @@
-FROM jarredsumner/bun:alpine-tiny AS bun
+FROM oven/bun:latest
 
 WORKDIR /app
 
