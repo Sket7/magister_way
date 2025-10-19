@@ -36,3 +36,9 @@ chmod +x scripts/*.sh
 ```bash
 cd backend && bun install
 ```
+
+## Полезно!
+
+### Дока юпиера
+
+- https://jupyter-server.readthedocs.io/en/latest/developers/rest-api.html
