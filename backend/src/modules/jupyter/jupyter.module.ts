@@ -1,8 +1,29 @@
-import { Module } from '@nestjs/common';
+import { type DynamicModule, Global, Module } from '@nestjs/common';
 import { JupyterService } from './jupyter.service';
+import { HttpModule } from '@nestjs/axios';
 
-@Module({
-  providers: [JupyterService],
-  exports: [JupyterService],
-})
-export class JupyterModule {}
+export interface JupyterModuleOptions {
+  baseUrl: string; // e.g. http://localhost:8888
+  token?: string; // Jupyter API token
+}
+
+export const JUPYTER_OPTIONS = Symbol('JUPYTER_OPTIONS');
+
+@Global()
+@Module({})
+export class JupyterModule {
+  static forRoot(options: JupyterModuleOptions): DynamicModule {
+    return {
+      module: JupyterModule,
+      imports: [HttpModule],
+      providers: [
+        JupyterService,
+        {
+          provide: JUPYTER_OPTIONS,
+          useValue: options,
+        },
+      ],
+      exports: [JupyterService],
+    };
+  }
+}

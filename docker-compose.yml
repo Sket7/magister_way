@@ -32,7 +32,7 @@ services:
       NB_GID: 100
     volumes:
       - scripts-data:/home/jovyan/work
-    command: start-notebook.sh --NotebookApp.token='token'
+    command: start-notebook.sh --NotebookApp.token='jupyter-token'
 
 volumes:
   scripts-data:
