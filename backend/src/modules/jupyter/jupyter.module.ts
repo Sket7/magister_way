@@ -7,9 +7,6 @@ export interface JupyterModuleOptions {
   token?: string; // Jupyter API token
 }
 
-export const JUPYTER_OPTIONS = Symbol('JUPYTER_OPTIONS');
-
-@Global()
 @Module({})
 export class JupyterModule {
   static forRoot(options: JupyterModuleOptions): DynamicModule {
@@ -19,7 +16,7 @@ export class JupyterModule {
       providers: [
         JupyterService,
         {
-          provide: JUPYTER_OPTIONS,
+          provide: 'JUPYTER_OPTIONS',
           useValue: options,
         },
       ],

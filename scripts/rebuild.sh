@@ -20,5 +20,5 @@ echo "🚀 Starting services..."
 docker compose up -d
 
 echo "✅ Rebuild complete!"
-echo "🌐 JupyterLab: http://localhost:8000"
+echo "🌐 JupyterLab: http://localhost:8888"
 echo "🧩 Backend: http://localhost:3000"
